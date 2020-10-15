@@ -149,3 +149,28 @@ nyc_water =
   jsonlite::fromJSON() %>%
   as_tibble()
 ```
+
+## BRFSS Dataset
+
+Same process, different data
+
+``` r
+brfss_smart2010 = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 5000)) %>% 
+  content("parsed")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_character(),
+    ##   year = col_double(),
+    ##   sample_size = col_double(),
+    ##   data_value = col_double(),
+    ##   confidence_limit_low = col_double(),
+    ##   confidence_limit_high = col_double(),
+    ##   display_order = col_double(),
+    ##   locationid = col_logical()
+    ## )
+
+    ## See spec(...) for full column specifications.
