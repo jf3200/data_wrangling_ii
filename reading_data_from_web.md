@@ -84,3 +84,39 @@ table_marj =
   slice(-1) %>% 
   as_tibble()
 ```
+
+## Star wars movie info
+
+I want the data from here (<https://www.imdb.com/list/ls070150896/>)
+
+``` r
+url = "https://www.imdb.com/list/ls070150896/"
+
+swm_html = 
+  read_html(url)
+```
+
+Grab elements that I want
+
+``` r
+title_vec = 
+  swm_html %>%
+  html_nodes(".lister-item-header a") %>%
+  html_text()
+
+gross_rev_vec = 
+  swm_html %>%
+  html_nodes(".text-small:nth-child(7) span:nth-child(5)") %>%
+  html_text()
+
+runtime_vec = 
+  swm_html %>%
+  html_nodes(".runtime") %>%
+  html_text()
+
+swm_df = 
+  tibble(
+    title = title_vec,
+    rev = gross_rev_vec,
+    runtime = runtime_vec)
+```
